@@ -13,6 +13,9 @@
                 var lang = localStorage.getItem("lang");
                 if (lang) document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
             } catch (e) { /* localStorage indisponível: segue padrão */ }
+            // com JS ativo, elementos .reveal começam ocultos até entrarem na tela;
+            // sem JS, o CSS mantém tudo visível
+            document.documentElement.classList.add("js");
         })();
     </script>
     <link rel="stylesheet" href="css/style.css">
@@ -95,11 +98,59 @@
         </div>
     </section>
 
-    <!-- Próximos blocos entram aqui (sobre, projetos, contato...) -->
+    <!-- ============ BLOCO 2: SOBRE ============ -->
+    <section class="about" id="sobre">
+        <div class="section-head reveal">
+            <p class="section-kicker" data-i18n="about.kicker">About me</p>
+            <h2 class="section-title" data-i18n="about.title">Turning curiosity into real software</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-photo reveal">
+                <div class="about-photo-frame">
+                    <img src="img/FotoPerfilLinkedin.jpeg" alt="Pedro Loschi Giovannini" loading="lazy">
+                </div>
+            </div>
+
+            <div class="about-text">
+                <p class="reveal" data-i18n="about.p1">I'm a 20-year-old software developer from Rio de Janeiro,
+                    studying Computer Science at PUC-Rio as a full merit scholarship holder of the Behring
+                    Foundation — after placing 1st in the university's entrance exam for my course.</p>
+                <p class="reveal" data-i18n="about.p2">For over a year I've been building real software and AI
+                    solutions at Instituto ECOA (PUC-Rio / Petrobras Ignição program), working end to end: from
+                    problem discovery and requirements to architecture, implementation, testing and delivery.
+                    I also support new programmers as a Python teaching assistant at PUC-Rio.</p>
+                <p class="reveal" data-i18n="about.p3">I'm always looking for challenging environments that
+                    stretch my technical skills and let me create impact through technology.</p>
+
+                <div class="about-stats">
+                    <div class="stat reveal">
+                        <span class="stat-value"><span class="stat-number" data-count="1">0</span><span class="stat-suffix" data-i18n="about.stat1suffix">st</span></span>
+                        <span class="stat-label" data-i18n="about.stat1">place in PUC-Rio's CS entrance exam</span>
+                    </div>
+                    <div class="stat reveal">
+                        <span class="stat-value"><span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span></span>
+                        <span class="stat-label" data-i18n="about.stat2">merit scholarship — Behring Foundation</span>
+                    </div>
+                    <div class="stat reveal">
+                        <span class="stat-value"><span class="stat-number" data-count="3">0</span></span>
+                        <span class="stat-label" data-i18n="about.stat3">AI solutions built for Petrobras</span>
+                    </div>
+                    <div class="stat reveal">
+                        <span class="stat-value"><span class="stat-number" data-count="1">0</span><span class="stat-suffix">+</span></span>
+                        <span class="stat-label" data-i18n="about.stat4">year shipping real-world products</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Próximos blocos entram aqui (projetos, experiência, contato...) -->
 
     <script src="js/hero.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/theme.js"></script>
+    <script src="js/reveal.js"></script>
 </body>
 </html>
