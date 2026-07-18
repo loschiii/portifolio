@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+/* Tema escuro (padrão) */
 :root {
     --bg: #07070d;
     --text: #eef0f6;
@@ -16,11 +17,32 @@
     --accent-1: #4f8cff;  /* azul */
     --accent-2: #b44fff;  /* roxo */
     --accent-3: #3fe0c5;  /* verde-água */
+    --nav-bg: rgba(7, 7, 13, 0.72);
+    --menu-bg: rgba(7, 7, 13, 0.92);
+    --border-soft: rgba(238, 240, 246, 0.07);
+    --ghost-border: rgba(238, 240, 246, 0.25);
+    --ghost-bg: rgba(238, 240, 246, 0.04);
+    --control-bg: rgba(238, 240, 246, 0.06);
     --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* Tema claro */
+html[data-theme="light"] {
+    --bg: #f4f6fb;
+    --text: #171923;
+    --text-dim: #5c6375;
+    --nav-bg: rgba(244, 246, 251, 0.78);
+    --menu-bg: rgba(244, 246, 251, 0.95);
+    --border-soft: rgba(23, 25, 35, 0.08);
+    --ghost-border: rgba(23, 25, 35, 0.22);
+    --ghost-bg: rgba(23, 25, 35, 0.04);
+    --control-bg: rgba(23, 25, 35, 0.06);
 }
 
 html {
     scroll-behavior: smooth;
+    /* âncoras não ficam escondidas atrás da navbar fixa */
+    scroll-padding-top: 4.5rem;
 }
 
 body {
@@ -28,6 +50,343 @@ body {
     color: var(--text);
     font-family: var(--font);
     overflow-x: hidden;
+    /* troca suave entre temas */
+    transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ============================================
+   BARRA DE PROGRESSO DE LEITURA
+   ============================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 30;
+}
+
+/* ============================================
+   NAVEGAÇÃO
+   ============================================ */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+    transition: background 0.35s ease, box-shadow 0.35s ease,
+                padding 0.35s ease, border-color 0.35s ease;
+    border-bottom: 1px solid transparent;
+    animation: nav-enter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+@keyframes nav-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* estado após rolar: efeito "vidro" */
+.nav.scrolled {
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--border-soft);
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+/* Logo */
+.nav-logo {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.nav-logo-mark {
+    background: linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-logo-dot {
+    color: var(--accent-3);
+}
+
+/* Links */
+.nav-list {
+    display: flex;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+    list-style: none;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 0.35rem 0;
+    transition: color 0.25s ease;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+    color: var(--text);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+    transform: scaleX(1);
+}
+
+.nav-link.is-active {
+    color: var(--text);
+}
+
+/* Desktop: links centralizados no meio da barra,
+   independentemente da largura do logo */
+@media (min-width: 901px) {
+    .nav-menu {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* link "Resume" duplicado: só existe no menu mobile */
+.nav-list-resume {
+    display: none;
+}
+
+/* ---------- Controles: idioma, tema e currículo ---------- */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+/* Alternador EN / PT */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: var(--control-bg);
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    padding: 0.1rem 0.15rem;
+    transition: color 0.25s ease;
+}
+
+.lang-btn:hover {
+    color: var(--text);
+}
+
+.lang-btn.active {
+    color: var(--accent-3);
+}
+
+.lang-sep {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+/* Botão de tema (sol/lua) */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: var(--control-bg);
+    color: var(--text);
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-3);
+    transform: rotate(15deg);
+}
+
+/* escuro: mostra o sol (clique = ir p/ claro);
+   claro: mostra a lua (clique = ir p/ escuro) */
+.icon-moon { display: none; }
+html[data-theme="light"] .icon-sun  { display: none; }
+html[data-theme="light"] .icon-moon { display: block; }
+
+/* Botão do currículo */
+.btn-resume {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    box-shadow: 0 3px 16px rgba(79, 140, 255, 0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-resume:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(180, 79, 255, 0.4);
+}
+
+/* Botão hambúrguer (escondido no desktop) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 25;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+    .nav-toggle {
+        display: flex;
+    }
+
+    /* na barra compacta, o currículo vai para dentro do menu */
+    .btn-resume {
+        display: none;
+    }
+
+    .nav-list-resume {
+        display: list-item;
+    }
+
+    .nav-list-resume .nav-link {
+        color: var(--accent-3);
+    }
+
+    .nav-controls {
+        gap: 0.5rem;
+    }
+
+    .nav-menu {
+        position: fixed;
+        inset: 0;
+        background: var(--menu-bg);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .nav-menu.open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .nav-link {
+        font-size: 1.5rem;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.4s ease, transform 0.4s ease, color 0.25s ease;
+    }
+
+    /* entrada em cascata dos links */
+    .nav-menu.open .nav-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .nav-menu.open .nav-list li:nth-child(1) .nav-link { transition-delay: 0.05s; }
+    .nav-menu.open .nav-list li:nth-child(2) .nav-link { transition-delay: 0.1s; }
+    .nav-menu.open .nav-list li:nth-child(3) .nav-link { transition-delay: 0.15s; }
+    .nav-menu.open .nav-list li:nth-child(4) .nav-link { transition-delay: 0.2s; }
+    .nav-menu.open .nav-list li:nth-child(5) .nav-link { transition-delay: 0.25s; }
+    .nav-menu.open .nav-list li:nth-child(6) .nav-link { transition-delay: 0.3s; }
+
+    /* hambúrguer vira X */
+    .nav-toggle.open .nav-toggle-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle.open .nav-toggle-bar:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle.open .nav-toggle-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* trava o scroll da página com o menu aberto */
+    body.menu-open {
+        overflow: hidden;
+    }
 }
 
 /* ============================================
@@ -205,9 +564,24 @@ body {
    ACESSIBILIDADE: movimento reduzido
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     .hero-content,
     .hero-title,
-    .scroll-hint-line::after {
+    .scroll-hint-line::after,
+    .nav {
         animation: none;
+    }
+
+    .nav-link::after,
+    .nav-menu,
+    .nav-link,
+    .nav-toggle-bar,
+    .theme-toggle,
+    .btn-resume,
+    body {
+        transition: none;
     }
 }

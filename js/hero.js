@@ -80,6 +80,11 @@
             hueStart, hueEnd,
         } = CONFIG;
 
+        // No tema claro os pontos precisam ESCURECER (não clarear)
+        // para continuarem visíveis sobre o fundo claro
+        const isLight =
+            document.documentElement.getAttribute("data-theme") === "light";
+
         for (const dot of dots) {
             // Onda ambiente: desloca a origem suavemente
             const wave = reducedMotion
@@ -125,10 +130,14 @@
             const energy = Math.max(proximity, agitation);
 
             // Cor: azul → roxo conforme a posição horizontal,
-            // mais brilho e saturação conforme a energia
+            // mais intensidade conforme a energia
             const hue = hueStart + (dot.ox / width) * (hueEnd - hueStart);
-            const lightness = 30 + energy * 45;   // 30% → 75%
-            const alpha = 0.25 + energy * 0.75;
+            const lightness = isLight
+                ? 62 - energy * 27    // claro: 62% → 35% (escurece)
+                : 30 + energy * 45;   // escuro: 30% → 75% (clareia)
+            const alpha = isLight
+                ? 0.35 + energy * 0.65
+                : 0.25 + energy * 0.75;
             const radius = baseRadius + energy * (maxRadius - baseRadius);
 
             ctx.beginPath();
@@ -141,7 +150,7 @@
             if (energy > 0.35) {
                 ctx.beginPath();
                 ctx.arc(dot.x, dot.y, radius * 3, 0, Math.PI * 2);
-                ctx.fillStyle = `hsla(${hue}, 90%, 65%, ${energy * 0.12})`;
+                ctx.fillStyle = `hsla(${hue}, 90%, ${isLight ? 45 : 65}%, ${energy * (isLight ? 0.15 : 0.12)})`;
                 ctx.fill();
             }
         }
