@@ -1,0 +1,420 @@
+/* ============================================================
+   MELHORIAS: logo v2, navbar dev, cursor custom,
+   terminal easter egg, konami e micro-animações
+   ============================================================ */
+
+/* ---------- Logo v2: glifo de terminal + wordmark ---------- */
+.nav-logo-v2 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.logo-glyph {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    background:
+        linear-gradient(135deg, rgba(79, 140, 255, 0.16), rgba(180, 79, 255, 0.16)) padding-box,
+        linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3)) border-box;
+    border: 1.5px solid transparent;
+    box-shadow: 0 2px 14px rgba(79, 140, 255, 0.25);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+html[data-theme="light"] .logo-glyph {
+    color: var(--text);
+}
+
+.nav-logo-v2:hover .logo-glyph {
+    box-shadow: 0 4px 22px rgba(180, 79, 255, 0.45);
+    transform: translateY(-1px);
+}
+
+.logo-prompt {
+    background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.logo-underscore {
+    color: var(--accent-3);
+    animation: cursor-blink 1.1s steps(2, start) infinite;
+}
+
+.logo-word {
+    position: relative;
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    line-height: 1;
+}
+
+.logo-tld {
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent-3);
+    opacity: 0.85;
+    line-height: 1;
+    margin-left: -0.45rem;
+}
+
+/* glitch da wordmark no hover (camadas via pseudo-elementos) */
+.logo-word::before,
+.logo-word::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-logo-v2:hover .logo-word::before {
+    opacity: 0.8;
+    color: var(--accent-1);
+    animation: glitch-a 0.34s steps(2, end) 2;
+}
+
+.nav-logo-v2:hover .logo-word::after {
+    opacity: 0.8;
+    color: var(--accent-3);
+    animation: glitch-b 0.34s steps(2, end) 2;
+}
+
+@keyframes glitch-a {
+    0%   { transform: translate(0, 0); clip-path: inset(0 0 62% 0); }
+    25%  { transform: translate(-2px, 1px); clip-path: inset(38% 0 22% 0); }
+    50%  { transform: translate(2px, -1px); clip-path: inset(70% 0 4% 0); }
+    75%  { transform: translate(-1px, 0); clip-path: inset(12% 0 55% 0); }
+    100% { transform: translate(0, 0); clip-path: inset(0 0 62% 0); }
+}
+
+@keyframes glitch-b {
+    0%   { transform: translate(0, 0); clip-path: inset(58% 0 0 0); }
+    25%  { transform: translate(2px, -1px); clip-path: inset(20% 0 45% 0); }
+    50%  { transform: translate(-2px, 1px); clip-path: inset(4% 0 74% 0); }
+    75%  { transform: translate(1px, 0); clip-path: inset(48% 0 14% 0); }
+    100% { transform: translate(0, 0); clip-path: inset(58% 0 0 0); }
+}
+
+/* ---------- Navbar: letras com pegada dev ---------- */
+.nav-link {
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+}
+
+/* largura estável durante o efeito de decodificação */
+.nav-link [data-i18n] {
+    display: inline-block;
+    min-width: 4ch;
+}
+
+/* a fonte mono deixa o menu mais largo: em larguras intermediárias,
+   compacta os links e tira a centralização absoluta — o menu flui
+   entre a logo e os controles sem colidir */
+@media (min-width: 901px) and (max-width: 1180px) {
+    .nav-menu {
+        position: static;
+        transform: none;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+    .nav-list {
+        gap: 0.9rem;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    .nav-num {
+        display: none;
+    }
+
+    .logo-tld {
+        display: none;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1010px) {
+    .btn-resume {
+        display: none;
+    }
+}
+
+/* ---------- Cursor customizado ---------- */
+html.custom-cursor,
+html.custom-cursor body,
+html.custom-cursor a,
+html.custom-cursor button,
+html.custom-cursor [tabindex] {
+    cursor: none;
+}
+
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+/* caret de terminal no lugar do ponto */
+.cursor-dot {
+    width: 9px;
+    height: 18px;
+    border-radius: 2px;
+    background: var(--accent-3);
+    box-shadow: 0 0 10px rgba(63, 224, 197, 0.55);
+    animation: caret-pulse 1.1s steps(2, start) infinite;
+}
+
+@keyframes caret-pulse {
+    50% { opacity: 0.35; }
+}
+
+/* sobre elementos interativos o caret vira um glifo de código */
+.cursor-dot.is-hover {
+    width: auto;
+    height: auto;
+    background: none;
+    box-shadow: none;
+    animation: none;
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-3);
+    text-shadow: 0 0 8px rgba(63, 224, 197, 0.7);
+}
+
+.cursor-dot.is-hover::before {
+    content: "</>";
+}
+
+.cursor-ring {
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--accent-1);
+    opacity: 0.7;
+    transition: width 0.22s ease, height 0.22s ease,
+                border-color 0.22s ease, opacity 0.22s ease;
+}
+
+.cursor-ring.is-hover {
+    width: 52px;
+    height: 52px;
+    border-color: var(--accent-3);
+    opacity: 1;
+}
+
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden {
+    opacity: 0;
+}
+
+/* ---------- Dica + overlay do terminal ---------- */
+.term-hint {
+    position: fixed;
+    left: 1.1rem;
+    bottom: 1.1rem;
+    z-index: 15;
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    background: var(--control-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.term-hint:hover {
+    opacity: 1;
+    color: var(--accent-3);
+}
+
+.term-hint kbd {
+    font-family: inherit;
+    color: var(--accent-3);
+    border: 1px solid var(--ghost-border);
+    border-radius: 4px;
+    padding: 0 0.3em;
+    margin-right: 0.4em;
+}
+
+@media (max-width: 900px) {
+    .term-hint { display: none; }
+}
+
+.terminal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgba(3, 3, 8, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.terminal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.terminal-panel {
+    width: min(720px, calc(100vw - 2rem));
+    height: min(420px, 60vh);
+    margin-bottom: clamp(1rem, 6vh, 3rem);
+    display: flex;
+    flex-direction: column;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    transform: translateY(24px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.86rem;
+}
+
+.terminal.open .terminal-panel {
+    transform: translateY(0);
+}
+
+.terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+}
+
+.terminal-bar .t-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--control-bg);
+    border: 1px solid var(--ghost-border);
+}
+
+.terminal-bar .t-dot:nth-child(1) { background: #ff5f57; border-color: transparent; }
+.terminal-bar .t-dot:nth-child(2) { background: #febc2e; border-color: transparent; }
+.terminal-bar .t-dot:nth-child(3) { background: #28c840; border-color: transparent; }
+
+.terminal-bar .t-title { margin-left: 0.5rem; }
+
+.terminal-out {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.9rem 1rem;
+    color: var(--text);
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.terminal-out .t-cmd { color: var(--accent-3); }
+.terminal-out .t-dim { color: var(--text-dim); }
+.terminal-out .t-acc { color: var(--accent-1); }
+.terminal-out .t-err { color: #ff6b6b; }
+
+.terminal-in {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1rem;
+    border-top: 1px solid var(--border-soft);
+}
+
+.terminal-in .t-prompt {
+    color: var(--accent-3);
+    font-weight: 700;
+}
+
+.terminal-in input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: inherit;
+    caret-color: var(--accent-3);
+}
+
+/* ---------- Toast (konami / avisos) ---------- */
+.fx-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 2rem;
+    z-index: 50;
+    transform: translate(-50%, 20px);
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--panel-bg);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--accent-3);
+    border-radius: 10px;
+    padding: 0.75rem 1.2rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fx-toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ---------- Konami: hacker mode ---------- */
+@keyframes konami-hue {
+    0%   { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+body.konami {
+    animation: konami-hue 3s linear infinite;
+}
+
+/* ---------- Acessibilidade ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .logo-underscore { animation: none; }
+    .nav-logo-v2:hover .logo-word::before,
+    .nav-logo-v2:hover .logo-word::after { animation: none; opacity: 0; }
+    body.konami { animation: none; }
+}
