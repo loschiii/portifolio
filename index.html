@@ -245,7 +245,7 @@
             </div>
 
             <article class="timeline-item reveal">
-                <div class="timeline-node node-fill"><img src="img/brasas-logo.png" alt="BRASAS English Course" loading="lazy"></div>
+                <div class="timeline-node"><img src="img/brasas-logo.png" alt="BRASAS English Course" loading="lazy"></div>
                 <div class="timeline-card">
                     <span class="timeline-badge badge-edu" data-i18n="exp.badgeEdu">Education</span>
                     <h3 class="timeline-role" data-i18n="exp.i6.role">English Proficiency Certificate</h3>
@@ -437,20 +437,47 @@
         <div class="skills-langs reveal">
             <h3 class="skills-langs-title" data-i18n="skills.langsTitle">Languages I speak</h3>
             <div class="lang-rows">
-                <div class="lang-row">
-                    <span class="lang-name" data-i18n="skills.pt">Portuguese</span>
-                    <div class="lang-bar"><div class="lang-fill" style="--w: 100%"></div></div>
-                    <span class="lang-level" data-i18n="skills.native">Native</span>
+                <div class="lang-ring">
+                    <div class="ring-wrap">
+                        <svg viewBox="0 0 110 110" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#4f8cff"/>
+                                    <stop offset="50%" stop-color="#b44fff"/>
+                                    <stop offset="100%" stop-color="#3fe0c5"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="ring-track" cx="55" cy="55" r="45"/>
+                            <circle class="ring-fill" cx="55" cy="55" r="45" style="--off: 0"/>
+                        </svg>
+                        <span class="ring-code">PT</span>
+                    </div>
+                    <p class="ring-name" data-i18n="skills.pt">Portuguese</p>
+                    <p class="ring-level" data-i18n="skills.native">Native</p>
                 </div>
-                <div class="lang-row">
-                    <span class="lang-name" data-i18n="skills.en">English</span>
-                    <div class="lang-bar"><div class="lang-fill" style="--w: 92%"></div></div>
-                    <span class="lang-level" data-i18n="skills.fluent">Fluent</span>
+
+                <div class="lang-ring">
+                    <div class="ring-wrap">
+                        <svg viewBox="0 0 110 110" aria-hidden="true">
+                            <circle class="ring-track" cx="55" cy="55" r="45"/>
+                            <circle class="ring-fill" cx="55" cy="55" r="45" style="--off: 22.6"/>
+                        </svg>
+                        <span class="ring-code">EN</span>
+                    </div>
+                    <p class="ring-name" data-i18n="skills.en">English</p>
+                    <p class="ring-level" data-i18n="skills.fluent">Fluent</p>
                 </div>
-                <div class="lang-row">
-                    <span class="lang-name" data-i18n="skills.es">Spanish</span>
-                    <div class="lang-bar"><div class="lang-fill" style="--w: 40%"></div></div>
-                    <span class="lang-level" data-i18n="skills.basic">Basic</span>
+
+                <div class="lang-ring">
+                    <div class="ring-wrap">
+                        <svg viewBox="0 0 110 110" aria-hidden="true">
+                            <circle class="ring-track" cx="55" cy="55" r="45"/>
+                            <circle class="ring-fill" cx="55" cy="55" r="45" style="--off: 169.8"/>
+                        </svg>
+                        <span class="ring-code">ES</span>
+                    </div>
+                    <p class="ring-name" data-i18n="skills.es">Spanish</p>
+                    <p class="ring-level" data-i18n="skills.basic">Basic</p>
                 </div>
             </div>
         </div>
