@@ -17,8 +17,9 @@
             "nav.skills": "Skills",
             "nav.contact": "Contact",
             "nav.resume": "Resume",
-            "hero.greeting": "Hi, I'm",
-            "hero.subtitle": "Developer & Digital Creator",
+            "hero.greeting": "Hello! My name is",
+            "hero.intro": "I'm a <span class=\"hl\">Software Engineer</span> passionate about <span class=\"hl\">AI</span>, a Computer Science student at PUC-Rio and a full merit scholar of the Behring Foundation. I build real products for Petrobras at Instituto ECOA — from discovery to delivery.",
+            "hero.based": "Based in Rio de Janeiro, Brazil",
             "hero.viewProjects": "View projects",
             "hero.contact": "Get in touch",
             "hero.scroll": "scroll to explore",
@@ -43,6 +44,10 @@
             "projects.bee.tagline": "Expertise specialized search",
             "projects.bee.desc": "A project I started in my first Ignição cycle that was later selected by Petrobras to evolve into a real-world application. It enables semantic search over a database of 8.9M+ Brazilian researchers, matching them by academic and professional background using embeddings for information retrieval. The first version is complete, and I'm now redesigning it to be more scalable and maintainable.",
             "projects.confidential": "Source code is confidential",
+            "projects.portfolio.tagline": "This very website",
+            "projects.portfolio.desc": "The site you're exploring right now — designed and built from scratch with pure HTML, CSS and JavaScript: interactive particle canvas, EN/PT internationalization, light/dark themes, 3D cards and zero frameworks or dependencies.",
+            "projects.opensource": "Open source",
+            "projects.viewCode": "View code on GitHub",
             "modal.close": "Close",
             "modal.prev": "Previous image",
             "modal.next": "Next image",
@@ -111,8 +116,9 @@
             "nav.skills": "Competências",
             "nav.contact": "Contato",
             "nav.resume": "Currículo",
-            "hero.greeting": "Olá, eu sou",
-            "hero.subtitle": "Desenvolvedor & Criador Digital",
+            "hero.greeting": "Olá! Meu nome é",
+            "hero.intro": "Sou <span class=\"hl\">Engenheiro de Software</span> apaixonado por <span class=\"hl\">IA</span>, estudante de Ciência da Computação na PUC-Rio e bolsista integral por mérito da Fundação Behring. Construo produtos reais para a Petrobras no Instituto ECOA — do discovery à entrega.",
+            "hero.based": "Rio de Janeiro, Brasil",
             "hero.viewProjects": "Ver projetos",
             "hero.contact": "Fale comigo",
             "hero.scroll": "role para explorar",
@@ -137,6 +143,10 @@
             "projects.bee.tagline": "Busca especializada por expertise",
             "projects.bee.desc": "Projeto que comecei no meu primeiro ciclo do Ignição e que depois foi selecionado pela Petrobras para evoluir para uma aplicação real. Permite busca semântica em uma base com mais de 8,9 milhões de pesquisadores brasileiros, combinando formação acadêmica e experiência profissional por meio de embeddings. A primeira versão está completa, e agora estou redesenhando o sistema para ser mais escalável e sustentável.",
             "projects.confidential": "Código-fonte confidencial",
+            "projects.portfolio.tagline": "Este próprio site",
+            "projects.portfolio.desc": "O site que você está explorando agora — projetado e construído do zero com HTML, CSS e JavaScript puros: canvas interativo de partículas, internacionalização EN/PT, temas claro/escuro, cards 3D e zero frameworks ou dependências.",
+            "projects.opensource": "Código aberto",
+            "projects.viewCode": "Ver código no GitHub",
             "modal.close": "Fechar",
             "modal.prev": "Imagem anterior",
             "modal.next": "Próxima imagem",
@@ -220,6 +230,12 @@
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
             const value = dict[el.dataset.i18n];
             if (value) el.textContent = value;
+        });
+
+        // chaves com HTML embutido (ex.: destaques coloridos no hero)
+        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+            const value = dict[el.dataset.i18nHtml];
+            if (value) el.innerHTML = value;
         });
 
         // rótulos acessíveis (aria-label) também traduzidos

@@ -44,22 +44,22 @@
 
     <!-- ============ NAVEGAÇÃO ============ -->
     <header class="nav" id="nav">
-        <a href="#hero" class="nav-logo" aria-label="Voltar ao início">
-            <span class="nav-logo-mark">PL</span><span class="nav-logo-dot">.</span>
+        <a href="#hero" class="nav-logo" aria-label="Pedro Loschi — home">
+            <span class="logo-bracket">&lt;</span><span class="nav-logo-mark">PL</span><span class="logo-bracket">/&gt;</span><span class="logo-cursor" aria-hidden="true"></span>
         </a>
 
         <nav class="nav-menu" id="nav-menu" aria-label="Main navigation">
             <ul class="nav-list">
-                <li><a href="#hero" class="nav-link is-active" data-i18n="nav.home">Home</a></li>
-                <li><a href="#sobre" class="nav-link" data-i18n="nav.about">About</a></li>
-                <li><a href="#projetos" class="nav-link" data-i18n="nav.projects">Projects</a></li>
-                <li><a href="#experiencia" class="nav-link" data-i18n="nav.experience">Experience</a></li>
-                <li><a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a></li>
-                <li><a href="#contato" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="#hero" class="nav-link is-active"><span class="nav-num">01.</span><span data-i18n="nav.home">Home</span></a></li>
+                <li><a href="#sobre" class="nav-link"><span class="nav-num">02.</span><span data-i18n="nav.about">About</span></a></li>
+                <li><a href="#projetos" class="nav-link"><span class="nav-num">03.</span><span data-i18n="nav.projects">Projects</span></a></li>
+                <li><a href="#experiencia" class="nav-link"><span class="nav-num">04.</span><span data-i18n="nav.experience">Experience</span></a></li>
+                <li><a href="#skills" class="nav-link"><span class="nav-num">05.</span><span data-i18n="nav.skills">Skills</span></a></li>
+                <li><a href="#contato" class="nav-link"><span class="nav-num">06.</span><span data-i18n="nav.contact">Contact</span></a></li>
                 <!-- só aparece no menu mobile; no desktop o botão fica na barra -->
                 <li class="nav-list-resume">
                     <a href="assets/Pedro_Loschi_Giovannini_Resume.pdf" target="_blank"
-                       rel="noopener" class="nav-link" data-i18n="nav.resume">Resume</a>
+                       rel="noopener" class="nav-link"><span class="nav-num">07.</span><span data-i18n="nav.resume">Resume</span></a>
                 </li>
             </ul>
         </nav>
@@ -101,12 +101,25 @@
         <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
         <div class="hero-content">
-            <p class="hero-greeting" data-i18n="hero.greeting">Hi, I'm</p>
-            <h1 class="hero-title">Pedro Loschi</h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">Developer &amp; Digital Creator</p>
+            <p class="hero-greeting" data-i18n="hero.greeting">Hello! My name is</p>
+            <h1 class="hero-title">Pedro Loschi Giovannini</h1>
+            <p class="hero-intro" data-i18n-html="hero.intro">I'm a <span class="hl">Software Engineer</span>
+                passionate about <span class="hl">AI</span>, a Computer Science student at PUC-Rio and a full
+                merit scholar of the Behring Foundation. I build real products for Petrobras at Instituto
+                ECOA — from discovery to delivery.</p>
+            <p class="hero-location">
+                <span data-i18n="hero.based">Based in Rio de Janeiro, Brazil</span>
+                <span class="loc-chip">BR</span>
+            </p>
             <div class="hero-actions">
                 <a href="#projetos" class="btn btn-primary" data-i18n="hero.viewProjects">View projects</a>
                 <a href="#contato" class="btn btn-ghost" data-i18n="hero.contact">Get in touch</a>
+            </div>
+            <div class="hero-social">
+                <a class="social-btn" data-icon="GitHub" href="https://github.com/loschiii"
+                   target="_blank" rel="noopener" aria-label="GitHub"></a>
+                <a class="social-btn" data-icon="LinkedIn" href="https://www.linkedin.com/in/pedroloschigiov"
+                   target="_blank" rel="noopener" aria-label="LinkedIn"></a>
             </div>
         </div>
 
@@ -244,6 +257,30 @@
                         <span data-i18n="projects.gallery">View gallery</span>
                         <span class="project-count">· 6 ↗</span>
                     </span>
+                </div>
+            </article>
+
+            <article class="project-card project-card-site reveal" tabindex="0">
+                <div class="project-logo"><img src="img/favicon.svg" alt="Portfolio" loading="lazy"></div>
+                <div class="project-body">
+                    <h3 class="project-name">Portfolio</h3>
+                    <p class="project-tagline" data-i18n="projects.portfolio.tagline">This very website</p>
+                    <ul class="project-tech">
+                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li><li>GitHub</li>
+                    </ul>
+                    <p class="project-desc" data-i18n="projects.portfolio.desc">The site you're exploring
+                        right now — designed and built from scratch with pure HTML, CSS and JavaScript:
+                        interactive particle canvas, EN/PT internationalization, light/dark themes, 3D cards
+                        and zero frameworks or dependencies.</p>
+                    <span class="project-status status-open">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span data-i18n="projects.opensource">Open source</span>
+                    </span>
+                    <a class="project-open" href="https://github.com/loschiii/portifolio"
+                       target="_blank" rel="noopener">
+                        <span data-i18n="projects.viewCode">View code on GitHub</span>
+                        <span class="project-count">↗</span>
+                    </a>
                 </div>
             </article>
         </div>
@@ -547,7 +584,7 @@
     <!-- ============ FOOTER ============ -->
     <footer class="footer">
         <a href="#hero" class="footer-logo" aria-label="Pedro Loschi — home">
-            <span class="nav-logo-mark">PL</span><span class="nav-logo-dot">.</span>
+            <span class="logo-bracket">&lt;</span><span class="nav-logo-mark">PL</span><span class="logo-bracket">/&gt;</span>
         </a>
         <div class="footer-text">
             <p data-i18n="footer.made">Designed &amp; built by Pedro Loschi Giovannini — vanilla HTML, CSS and JS.</p>
