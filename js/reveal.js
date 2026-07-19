@@ -59,6 +59,13 @@
                     entry.target.classList.add("visible");
                     animateCounters(entry.target);
                     observer.unobserve(entry.target); // anima só na 1ª vez
+
+                    // terminada a entrada, remove as classes de reveal para
+                    // devolver ao elemento suas transições normais (ex.: o
+                    // tilt dos cards ficava lento/atrasado por herdá-las)
+                    setTimeout(function () {
+                        entry.target.classList.remove("reveal", "visible");
+                    }, 1300);
                 }
             });
         },

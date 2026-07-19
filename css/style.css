@@ -23,6 +23,8 @@
     --ghost-border: rgba(238, 240, 246, 0.25);
     --ghost-bg: rgba(238, 240, 246, 0.04);
     --control-bg: rgba(238, 240, 246, 0.06);
+    --card-bg: rgba(238, 240, 246, 0.035);
+    --panel-bg: #101019;
     --font: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
@@ -37,6 +39,8 @@ html[data-theme="light"] {
     --ghost-border: rgba(23, 25, 35, 0.22);
     --ghost-bg: rgba(23, 25, 35, 0.04);
     --control-bg: rgba(23, 25, 35, 0.06);
+    --card-bg: #ffffff;
+    --panel-bg: #ffffff;
 }
 
 html {
@@ -693,9 +697,9 @@ html.js .reveal.visible {
 }
 
 /* entrada em cascata dos cartões de números */
-html.js .about-stats .stat:nth-child(2) { transition-delay: 0.1s; }
-html.js .about-stats .stat:nth-child(3) { transition-delay: 0.2s; }
-html.js .about-stats .stat:nth-child(4) { transition-delay: 0.3s; }
+html.js .about-stats .stat.reveal:nth-child(2) { transition-delay: 0.1s; }
+html.js .about-stats .stat.reveal:nth-child(3) { transition-delay: 0.2s; }
+html.js .about-stats .stat.reveal:nth-child(4) { transition-delay: 0.3s; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
@@ -727,6 +731,412 @@ html.js .about-stats .stat:nth-child(4) { transition-delay: 0.3s; }
 }
 
 /* ============================================
+   BLOCO PROJETOS
+   ============================================ */
+.projects {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: clamp(4rem, 10vh, 6.5rem) clamp(1.5rem, 6vw, 4rem);
+}
+
+.section-sub {
+    color: var(--text-dim);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 62ch;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem;
+}
+
+/* telas estreitas: um card por linha */
+@media (max-width: 760px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Card ---------- */
+.project-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 22px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+    border-color: rgba(79, 140, 255, 0.4);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="light"] .project-card:hover,
+html[data-theme="light"] .project-card:focus-visible {
+    box-shadow: 0 18px 44px rgba(23, 25, 35, 0.14);
+}
+
+/* brilho que segue o cursor (posição via --mx/--my do JS) */
+.project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        420px circle at var(--mx, 50%) var(--my, 50%),
+        rgba(79, 140, 255, 0.16),
+        transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+/* cascata na entrada dos cards (só enquanto .reveal existe;
+   depois o JS remove a classe e o tilt fica instantâneo) */
+html.js .projects-grid .project-card.reveal:nth-child(2) { transition-delay: 0.12s; }
+html.js .projects-grid .project-card.reveal:nth-child(3) { transition-delay: 0.24s; }
+
+/* placa creme para a logo brilhar nos dois temas */
+.project-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: clamp(220px, 26vw, 300px);
+    padding: 2.5rem;
+    background: #f4f0e6;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.project-logo img {
+    max-height: 100%;
+    max-width: 88%;
+    object-fit: contain;
+    display: block;
+}
+
+.project-body {
+    padding: 1.9rem 2rem 2.1rem;
+}
+
+.project-name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.project-tagline {
+    color: var(--accent-3);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+}
+
+.project-desc {
+    color: var(--text-dim);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-top: 0.85rem;
+}
+
+.project-tech {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.project-tech li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(73, 184, 255, 0.75);
+    background: rgba(73, 184, 255, 0.14);
+    color: var(--text);
+    box-shadow: 0 0 10px rgba(73, 184, 255, 0.12) inset;
+}
+
+html[data-theme="light"] .project-tech li {
+    border-color: rgba(23, 105, 210, 0.55);
+    background: rgba(73, 160, 255, 0.12);
+    box-shadow: none;
+}
+
+/* logos oficiais dentro dos chips (SVGs embutidos) */
+.tech-ico {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    fill: #49b8ff;
+}
+
+html[data-theme="light"] .tech-ico {
+    fill: #1769d2;
+}
+
+.project-desc {
+    margin-top: 1.1rem;
+}
+
+/* selo de status (ex.: código confidencial) */
+.project-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 192, 99, 0.55);
+    color: #e8c063;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+html[data-theme="light"] .project-status {
+    color: #8a6d1f;
+    border-color: rgba(138, 109, 31, 0.45);
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.project-open {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.1rem;
+    color: var(--accent-1);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.project-count {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+}
+
+/* ---------- Modal de galeria ---------- */
+.project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-modal[hidden] {
+    display: none;
+}
+
+.project-modal.open {
+    opacity: 1;
+}
+
+.project-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.project-modal-panel {
+    position: relative;
+    width: min(860px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 24px;
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    transform: translateY(18px) scale(0.98);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-modal.open .project-modal-panel {
+    transform: none;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: var(--control-bg);
+    color: var(--text);
+    transition: background 0.25s ease, color 0.25s ease;
+    z-index: 1;
+}
+
+.modal-close:hover {
+    color: var(--accent-2);
+}
+
+.modal-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.modal-tagline {
+    color: var(--accent-3);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+}
+
+.modal-gallery {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.4rem;
+}
+
+.modal-stage {
+    flex: 1;
+    height: min(52vh, 440px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+html[data-theme="light"] .modal-stage {
+    background: rgba(23, 25, 35, 0.06);
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.modal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--ghost-border);
+    background: var(--control-bg);
+    color: var(--text);
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.modal-nav:hover {
+    color: var(--accent-3);
+    border-color: var(--accent-3);
+    transform: scale(1.08);
+}
+
+.modal-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.modal-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: var(--ghost-border);
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.modal-dot.active {
+    background: linear-gradient(100deg, var(--accent-1), var(--accent-2));
+    transform: scale(1.35);
+}
+
+.modal-desc {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-top: 1.25rem;
+}
+
+.modal-tech {
+    margin-top: 1rem;
+}
+
+/* trava o scroll do fundo com o modal aberto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* modal em telas pequenas: setas viram sobreposição */
+@media (max-width: 600px) {
+    .modal-gallery {
+        position: relative;
+        gap: 0;
+    }
+
+    .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.45);
+        border-color: transparent;
+        color: #fff;
+    }
+
+    .modal-nav:hover {
+        transform: translateY(-50%) scale(1.08);
+    }
+
+    .modal-prev { left: 0.5rem; }
+    .modal-next { right: 0.5rem; }
+
+    .modal-stage {
+        height: 46vh;
+    }
+}
+
+/* ============================================
    ACESSIBILIDADE: movimento reduzido
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -754,6 +1164,9 @@ html.js .about-stats .stat:nth-child(4) { transition-delay: 0.3s; }
     .nav-toggle-bar,
     .theme-toggle,
     .btn-resume,
+    .project-card,
+    .project-modal,
+    .project-modal-panel,
     body {
         transition: none;
     }

@@ -145,12 +145,147 @@
         </div>
     </section>
 
-    <!-- Próximos blocos entram aqui (projetos, experiência, contato...) -->
+    <!-- ============ BLOCO 3: PROJETOS ============ -->
+    <section class="projects" id="projetos">
+        <div class="section-head reveal">
+            <p class="section-kicker" data-i18n="projects.kicker">Portfolio</p>
+            <h2 class="section-title" data-i18n="projects.title">AI products shipped to a real client</h2>
+            <p class="section-sub" data-i18n="projects.intro">Three solutions designed, validated and delivered
+                to Petrobras through the Ignição program (Instituto ECOA PUC-Rio) — from problem discovery
+                to working software.</p>
+        </div>
+
+        <div class="projects-grid">
+            <article class="project-card reveal" data-project="oraculo" tabindex="0">
+                <div class="project-logo"><img src="img/oraculo-logo.png" alt="Oráculo" loading="lazy"></div>
+                <div class="project-body">
+                    <h3 class="project-name">Oráculo</h3>
+                    <p class="project-tagline" data-i18n="projects.oraculo.tagline">Intelligent document verification</p>
+                    <ul class="project-tech">
+                        <li>Django</li><li>Python</li><li>OpenAI API</li><li>SQLite</li><li>pypdf</li>
+                        <li>scikit-learn</li><li>HTML</li><li>REST API</li><li>JSON Rules</li><li>PDF</li>
+                    </ul>
+                    <p class="project-desc" data-i18n="projects.oraculo.desc">In my last Discovery cycle, my team
+                        and I interviewed Petrobras employees to deeply understand their document-review routine,
+                        then built a web application that uses AI to automatically flag inconsistencies between
+                        documents and internal standards — making the analysis faster and more structured.</p>
+                    <span class="project-status">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span data-i18n="projects.confidential">Source code is confidential</span>
+                    </span>
+                    <span class="project-open">
+                        <span data-i18n="projects.gallery">View gallery</span>
+                        <span class="project-count">· 2 ↗</span>
+                    </span>
+                </div>
+            </article>
+
+            <article class="project-card reveal" data-project="prisma" tabindex="0">
+                <div class="project-logo"><img src="img/prisma-logo.png" alt="Prisma" loading="lazy"></div>
+                <div class="project-body">
+                    <h3 class="project-name">Prisma</h3>
+                    <p class="project-tagline" data-i18n="projects.prisma.tagline">AI assistant in the Microsoft ecosystem</p>
+                    <ul class="project-tech">
+                        <li>SPFx</li><li>TypeScript</li><li>React</li><li>Node.js</li><li>Python</li><li>Flask</li>
+                        <li>OpenAI API</li><li>python-pptx</li><li>Text-to-Speech</li><li>REST API</li><li>SharePoint</li><li>SCSS</li>
+                    </ul>
+                    <p class="project-desc" data-i18n="projects.prisma.desc">Over an intense three-month cycle,
+                        we went from problem discovery to a working MVP: a WebPart integrated into Microsoft 365
+                        that uses LLMs to support decision-making and continuous learning for Petrobras
+                        employees — delivered inside the client's own environment.</p>
+                    <span class="project-status">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span data-i18n="projects.confidential">Source code is confidential</span>
+                    </span>
+                    <span class="project-open">
+                        <span data-i18n="projects.gallery">View gallery</span>
+                        <span class="project-count">· 4 ↗</span>
+                    </span>
+                </div>
+            </article>
+
+            <article class="project-card reveal" data-project="bee" tabindex="0">
+                <div class="project-logo"><img src="img/bee.png" alt="Bee" loading="lazy"></div>
+                <div class="project-body">
+                    <h3 class="project-name">Bee</h3>
+                    <p class="project-tagline" data-i18n="projects.bee.tagline">Expertise specialized search</p>
+                    <ul class="project-tech">
+                        <li>Django</li><li>Python</li><li>JavaScript</li><li>Bootstrap</li><li>HTML</li>
+                        <li>PostgreSQL</li><li>SQLite</li><li>Vector DB</li><li>CNPq</li><li>Lattes</li>
+                    </ul>
+                    <p class="project-desc" data-i18n="projects.bee.desc">A project I started in my first Ignição
+                        cycle that was later selected by Petrobras to evolve into a real-world application. It
+                        enables semantic search over a database of 8.9M+ Brazilian researchers, matching them by
+                        academic and professional background using embeddings for information retrieval. The first
+                        version is complete, and I'm now redesigning it to be more scalable and maintainable.</p>
+                    <span class="project-status">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span data-i18n="projects.confidential">Source code is confidential</span>
+                    </span>
+                    <span class="project-open">
+                        <span data-i18n="projects.gallery">View gallery</span>
+                        <span class="project-count">· 6 ↗</span>
+                    </span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Próximos blocos entram aqui (experiência, contato...) -->
+
+    <!-- Modal de galeria dos projetos -->
+    <div class="project-modal" id="project-modal" hidden>
+        <div class="project-modal-backdrop" data-close></div>
+        <div class="project-modal-panel" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <button type="button" class="modal-close" data-close
+                    data-i18n-aria="modal.close" aria-label="Close">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <header class="modal-head">
+                <h3 class="modal-title" id="project-modal-title"></h3>
+                <p class="modal-tagline"></p>
+            </header>
+
+            <div class="modal-gallery">
+                <button type="button" class="modal-nav modal-prev"
+                        data-i18n-aria="modal.prev" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <figure class="modal-stage">
+                    <img class="modal-image" src="" alt="">
+                </figure>
+                <button type="button" class="modal-nav modal-next"
+                        data-i18n-aria="modal.next" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-dots"></div>
+
+            <p class="modal-desc"></p>
+            <ul class="modal-tech project-tech"></ul>
+            <span class="project-status modal-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span data-i18n="projects.confidential">Source code is confidential</span>
+            </span>
+        </div>
+    </div>
 
     <script src="js/hero.js"></script>
     <script src="js/nav.js"></script>
     <script src="js/i18n.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/reveal.js"></script>
+    <script src="js/icons.js"></script>
+    <script src="js/projects.js"></script>
 </body>
 </html>
