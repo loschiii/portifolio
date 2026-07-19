@@ -105,6 +105,7 @@
             "contact.email": "Email",
             "footer.made": "Designed & built by Pedro Loschi Giovannini — vanilla HTML, CSS and JS.",
             "footer.top": "Back to top",
+            "intro.skip": "Skip intro",
         },
         pt: {
             "meta.title": "Pedro Loschi — Portfólio",
@@ -204,6 +205,7 @@
             "contact.email": "E-mail",
             "footer.made": "Projetado e construído por Pedro Loschi Giovannini — HTML, CSS e JS puros.",
             "footer.top": "Voltar ao topo",
+            "intro.skip": "Pular intro",
         },
     };
 

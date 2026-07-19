@@ -72,9 +72,16 @@
         });
     }
 
-    // hero: saudação decodifica ao carregar
+    // hero: saudação decodifica assim que a intro revela o site
+    // (com um fallback caso o evento nunca chegue)
     var greeting = document.querySelector(".hero-greeting");
-    if (greeting) setTimeout(function () { scramble(greeting, { perChar: 4 }); }, 600);
+    if (greeting) {
+        var greetFallback = setTimeout(function () { scramble(greeting, { perChar: 4 }); }, 3600);
+        document.addEventListener("intro:done", function () {
+            clearTimeout(greetFallback);
+            setTimeout(function () { scramble(greeting, { perChar: 4 }); }, 150);
+        }, { once: true });
+    }
 
     /* ---------- Cursor customizado ---------- */
     if (finePointer && !reducedMotion && OPTS.cursor !== false) {
