@@ -3,45 +3,19 @@
    terminal easter egg, konami e micro-animações
    ============================================================ */
 
-/* ---------- Logo v2: glifo de terminal + wordmark ---------- */
+/* ---------- Logo v2: prompt de terminal + wordmark ---------- */
 .nav-logo-v2 {
     display: flex;
-    align-items: center;
-    gap: 0.6rem;
+    align-items: baseline;
+    gap: 0.05rem;
     text-decoration: none;
 }
 
-.logo-glyph {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1px;
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    font-family: Consolas, "SF Mono", "Fira Code", monospace;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #fff;
-    background:
-        linear-gradient(135deg, rgba(79, 140, 255, 0.16), rgba(180, 79, 255, 0.16)) padding-box,
-        linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3)) border-box;
-    border: 1.5px solid transparent;
-    box-shadow: 0 2px 14px rgba(79, 140, 255, 0.25);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-html[data-theme="light"] .logo-glyph {
-    color: var(--text);
-}
-
-.nav-logo-v2:hover .logo-glyph {
-    box-shadow: 0 4px 22px rgba(180, 79, 255, 0.45);
-    transform: translateY(-1px);
-}
-
 .logo-prompt {
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-right: 0.05rem;
     background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
@@ -49,7 +23,11 @@ html[data-theme="light"] .logo-glyph {
 }
 
 .logo-underscore {
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: var(--accent-3);
+    margin-right: 0.2rem;
     animation: cursor-blink 1.1s steps(2, start) infinite;
 }
 
@@ -61,16 +39,20 @@ html[data-theme="light"] .logo-glyph {
     letter-spacing: 0.01em;
     color: var(--text);
     line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.nav-logo-v2:hover .logo-word {
+    color: var(--accent-1);
 }
 
 .logo-tld {
     font-family: Consolas, "SF Mono", "Fira Code", monospace;
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: var(--accent-3);
     opacity: 0.85;
     line-height: 1;
-    margin-left: -0.45rem;
 }
 
 /* glitch da wordmark no hover (camadas via pseudo-elementos) */
@@ -175,41 +157,29 @@ html.custom-cursor [tabindex] {
     pointer-events: none;
     z-index: 9999;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
     will-change: transform;
 }
 
-/* caret de terminal no lugar do ponto */
+/* glifo de código no lugar do ponto */
 .cursor-dot {
-    width: 9px;
-    height: 18px;
-    border-radius: 2px;
-    background: var(--accent-3);
-    box-shadow: 0 0 10px rgba(63, 224, 197, 0.55);
-    animation: caret-pulse 1.1s steps(2, start) infinite;
-}
-
-@keyframes caret-pulse {
-    50% { opacity: 0.35; }
-}
-
-/* sobre elementos interativos o caret vira um glifo de código */
-.cursor-dot.is-hover {
-    width: auto;
-    height: auto;
-    background: none;
-    box-shadow: none;
-    animation: none;
     font-family: Consolas, "SF Mono", "Fira Code", monospace;
     font-size: 13px;
     font-weight: 700;
     line-height: 1;
     color: var(--accent-3);
-    text-shadow: 0 0 8px rgba(63, 224, 197, 0.7);
+    text-shadow: 0 0 8px rgba(63, 224, 197, 0.65);
+    transition: font-size 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
 }
 
-.cursor-dot.is-hover::before {
+.cursor-dot::before {
     content: "</>";
+}
+
+/* sobre elementos interativos o glifo cresce e muda de cor */
+.cursor-dot.is-hover {
+    font-size: 17px;
+    color: var(--accent-1);
+    text-shadow: 0 0 10px rgba(79, 140, 255, 0.75);
 }
 
 .cursor-ring {
@@ -239,22 +209,34 @@ html.custom-cursor [tabindex] {
     left: 1.1rem;
     bottom: 1.1rem;
     z-index: 15;
+    display: flex;
+    align-items: center;
     font-family: Consolas, "SF Mono", "Fira Code", monospace;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
+    font-weight: 600;
     letter-spacing: 0.05em;
-    color: var(--text-dim);
-    background: var(--control-bg);
-    border: 1px solid var(--border-soft);
+    color: var(--text);
+    background: var(--panel-bg);
+    border: 1px solid var(--accent-3);
     border-radius: 999px;
-    padding: 0.4rem 0.85rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    opacity: 0.75;
-    transition: opacity 0.25s ease, color 0.25s ease;
+    opacity: 0.95;
+    animation: term-hint-pulse 2.6s ease-in-out infinite;
+    transition: opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.term-hint::before {
+    content: "</>";
+    margin-right: 0.5em;
+    font-weight: 700;
+    color: var(--accent-3);
 }
 
 .term-hint:hover {
     opacity: 1;
     color: var(--accent-3);
+    transform: translateY(-2px);
 }
 
 .term-hint kbd {
@@ -266,8 +248,22 @@ html.custom-cursor [tabindex] {
     margin-right: 0.4em;
 }
 
+@keyframes term-hint-pulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(63, 224, 197, 0); }
+    50% { box-shadow: 0 0 0 6px rgba(63, 224, 197, 0.12), 0 0 20px rgba(63, 224, 197, 0.35); }
+}
+
 @media (max-width: 900px) {
-    .term-hint { display: none; }
+    .term-hint {
+        left: 0.75rem;
+        bottom: 0.75rem;
+        font-size: 0.7rem;
+        padding: 0.45rem 0.85rem;
+    }
+
+    .term-hint kbd {
+        display: none;
+    }
 }
 
 .terminal {
@@ -417,4 +413,5 @@ body.konami {
     .nav-logo-v2:hover .logo-word::before,
     .nav-logo-v2:hover .logo-word::after { animation: none; opacity: 0; }
     body.konami { animation: none; }
+    .term-hint { animation: none; }
 }

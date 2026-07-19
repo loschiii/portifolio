@@ -109,8 +109,8 @@
         (function follow() {
             rx += (mx - rx) * 0.16;
             ry += (my - ry) * 0.16;
-            dot.style.transform = "translate(" + (mx - 4) + "px," + (my - 9) + "px)";
-            ring.style.transform = "translate(" + (rx - 17) + "px," + (ry - 17) + "px)";
+            dot.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%, -50%)";
+            ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%, -50%)";
             requestAnimationFrame(follow);
         })();
     }
