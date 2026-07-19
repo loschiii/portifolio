@@ -9,6 +9,7 @@
     const translations = {
         en: {
             "meta.title": "Pedro Loschi — Portfolio",
+            "meta.desc": "Software developer and Computer Science student at PUC-Rio. I build AI-powered products for Petrobras through the ECOA/Ignição program — from discovery to delivery.",
             "nav.home": "Home",
             "nav.about": "About",
             "nav.projects": "Projects",
@@ -102,6 +103,7 @@
         },
         pt: {
             "meta.title": "Pedro Loschi — Portfólio",
+            "meta.desc": "Desenvolvedor de software e estudante de Ciência da Computação na PUC-Rio. Construo produtos com IA para a Petrobras pelo programa ECOA/Ignição — do discovery à entrega.",
             "nav.home": "Início",
             "nav.about": "Sobre",
             "nav.projects": "Projetos",
@@ -205,6 +207,15 @@
 
         document.documentElement.lang = lang === "pt" ? "pt-BR" : "en";
         document.title = dict["meta.title"];
+
+        // meta description acompanha o idioma
+        const desc = dict["meta.desc"];
+        if (desc) {
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute("content", desc);
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.setAttribute("content", desc);
+        }
 
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
             const value = dict[el.dataset.i18n];
