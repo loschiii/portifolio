@@ -92,6 +92,13 @@
             "skills.native": "Native",
             "skills.fluent": "Fluent",
             "skills.basic": "Basic",
+            "contact.kicker": "Contact",
+            "contact.title": "Let's build something together?",
+            "contact.sub": "I'm open to internship opportunities, projects and good conversations about technology — from Rio de Janeiro to anywhere, remotely.",
+            "contact.cta": "Send me an email",
+            "contact.email": "Email",
+            "footer.made": "Designed & built by Pedro Loschi Giovannini — vanilla HTML, CSS and JS.",
+            "footer.top": "Back to top",
         },
         pt: {
             "meta.title": "Pedro Loschi — Portfólio",
@@ -178,6 +185,13 @@
             "skills.native": "Nativo",
             "skills.fluent": "Fluente",
             "skills.basic": "Básico",
+            "contact.kicker": "Contato",
+            "contact.title": "Vamos construir algo juntos?",
+            "contact.sub": "Estou aberto a oportunidades de estágio, projetos e boas conversas sobre tecnologia — do Rio de Janeiro para qualquer lugar, remotamente.",
+            "contact.cta": "Me mande um e-mail",
+            "contact.email": "E-mail",
+            "footer.made": "Projetado e construído por Pedro Loschi Giovannini — HTML, CSS e JS puros.",
+            "footer.top": "Voltar ao topo",
         },
     };
 
