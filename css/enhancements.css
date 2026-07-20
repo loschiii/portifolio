@@ -407,6 +407,37 @@ body.konami {
     animation: konami-hue 3s linear infinite;
 }
 
+/* ---------- Skills: esfera 3D de tecnologias ---------- */
+.skills-sphere {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.5rem auto 2.5rem;
+}
+
+#skills-sphere-canvas {
+    display: block;
+    max-width: 100%;
+    cursor: grab;
+    /* arraste horizontal gira a esfera; o vertical continua rolando a página */
+    touch-action: pan-y;
+}
+
+#skills-sphere-canvas.is-dragging {
+    cursor: grabbing;
+}
+
+.sphere-hint {
+    font-family: Consolas, "SF Mono", "Fira Code", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: lowercase;
+    color: var(--text-dim);
+    opacity: 0.7;
+    user-select: none;
+}
+
 /* ---------- Acessibilidade ---------- */
 @media (prefers-reduced-motion: reduce) {
     .logo-underscore { animation: none; }
