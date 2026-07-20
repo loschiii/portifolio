@@ -107,6 +107,7 @@
             "footer.top": "Back to top",
             "intro.skip": "Skip intro",
             "skills.sphereHint": "drag to spin",
+            "resume.file": "assets/Pedro_Loschi_Giovannini_Resume.pdf",
         },
         pt: {
             "meta.title": "Pedro Loschi — Portfólio",
@@ -208,6 +209,7 @@
             "footer.top": "Voltar ao topo",
             "intro.skip": "Pular intro",
             "skills.sphereHint": "arraste para girar",
+            "resume.file": "assets/Curriculo_Pedro_Loschi_Giovannini.pdf",
         },
     };
 
@@ -247,6 +249,14 @@
             const value = dict[el.dataset.i18nAria];
             if (value) el.setAttribute("aria-label", value);
         });
+
+        // currículo: cada idioma aponta para o seu PDF
+        const resumeFile = dict["resume.file"];
+        if (resumeFile) {
+            document.querySelectorAll("[data-resume]").forEach(function (el) {
+                el.setAttribute("href", resumeFile);
+            });
+        }
 
         langButtons.forEach(function (btn) {
             const active = btn.dataset.lang === lang;

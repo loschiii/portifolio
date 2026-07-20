@@ -249,8 +249,13 @@
             updateHintLabel();
         },
         resume: function () {
-            window.open("assets/Pedro_Loschi_Giovannini_Resume.pdf", "_blank", "noopener");
-            print('<span class="t-dim">opening resume.pdf…</span>');
+            // segue o idioma ativo: o i18n mantém o href dos links atualizado
+            var link = document.querySelector("[data-resume]");
+            var file = link ? link.getAttribute("href")
+                            : "assets/Pedro_Loschi_Giovannini_Resume.pdf";
+            window.open(file, "_blank", "noopener");
+            print('<span class="t-dim">' +
+                (isPT() ? "abrindo curriculo.pdf…" : "opening resume.pdf…") + "</span>");
         },
         sudo: function () {
             print('<span class="t-err">' + (isPT() ? "permissão negada: aqui só o Pedro manda ;)" : "permission denied: only Pedro has root here ;)") + "</span>");
