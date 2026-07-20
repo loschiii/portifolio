@@ -33,6 +33,10 @@ html[data-theme="light"] {
     --bg: #f4f6fb;
     --text: #171923;
     --text-dim: #5c6375;
+    /* o verde-água do tema escuro fica ilegível sobre fundo claro (1.6:1);
+       este tom mantém o mesmo matiz e passa a WCAG AA (4.5:1) sobre os
+       três fundos claros: página, card branco e controles acinzentados */
+    --accent-3: #137464;
     --nav-bg: rgba(244, 246, 251, 0.78);
     --menu-bg: rgba(244, 246, 251, 0.95);
     --border-soft: rgba(23, 25, 35, 0.08);
@@ -1034,8 +1038,8 @@ html[data-theme="light"] .project-status {
 }
 
 html[data-theme="light"] .project-status.status-open {
-    color: #0d8a72;
-    border-color: rgba(13, 138, 114, 0.45);
+    color: var(--accent-3);
+    border-color: rgba(20, 123, 106, 0.45);
 }
 
 /* card do próprio portfólio: logo SVG menor na placa */
@@ -1390,8 +1394,19 @@ html[data-theme="light"] .timeline-card:hover {
 }
 
 html[data-theme="light"] .badge-edu {
-    color: #0d8a72;
-    border-color: rgba(13, 138, 114, 0.45);
+    color: var(--accent-3);
+    border-color: rgba(20, 123, 106, 0.45);
+}
+
+/* o azul da marca só atinge 3.2:1 sobre fundo claro: suficiente para o
+   título do hero (texto grande), não para estes rótulos pequenos */
+html[data-theme="light"] .badge-work {
+    color: #055cff;
+    border-color: rgba(5, 92, 255, 0.45);
+}
+
+html[data-theme="light"] .project-open {
+    color: #055cff;
 }
 
 .badge-award {
