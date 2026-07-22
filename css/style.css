@@ -717,20 +717,23 @@ html.js .reveal.visible {
 
 .about-grid {
     display: grid;
-    grid-template-columns: minmax(280px, 420px) 1fr;
+    grid-template-columns: minmax(300px, 460px) 1fr;
     gap: clamp(2.5rem, 6vw, 4.5rem);
-    align-items: center;
+    align-items: start;
 }
 
 /* ---------- Foto ---------- */
 .about-photo {
     display: flex;
     justify-content: center;
+    /* acompanha a leitura do texto ao lado */
+    position: sticky;
+    top: 6.5rem;
 }
 
 .about-photo-frame {
     position: relative;
-    width: min(400px, 80vw);
+    width: min(460px, 82vw);
     aspect-ratio: 1;
     border-radius: 28px;
     padding: 5px; /* espessura do anel em gradiente */
@@ -811,6 +814,16 @@ html.js .about-stats .stat.reveal:nth-child(4) { transition-delay: 0.3s; }
 @media (max-width: 900px) {
     .about-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* empilhado: foto volta a rolar junto e fica menos alta */
+    .about-photo {
+        position: static;
+    }
+
+    .about-photo-frame {
+        width: min(360px, 80vw);
+        aspect-ratio: 1;
     }
 
     .about-text {
@@ -1042,9 +1055,10 @@ html[data-theme="light"] .project-status.status-open {
     border-color: rgba(20, 123, 106, 0.45);
 }
 
-/* card do próprio portfólio: logo SVG menor na placa */
+/* card do próprio portfólio: logo SVG ocupa bem a placa */
 .project-card-site .project-logo img {
-    max-height: 58%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .project-open {

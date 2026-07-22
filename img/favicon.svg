@@ -7,7 +7,6 @@
         </linearGradient>
     </defs>
     <rect width="64" height="64" rx="14" fill="#07070d"/>
-    <text x="31" y="44" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="800"
+    <text x="32" y="45" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="800"
           text-anchor="middle" fill="url(#g)">PL</text>
-    <circle cx="52" cy="43" r="3.2" fill="#3fe0c5"/>
 </svg>
